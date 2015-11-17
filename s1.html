@@ -33,199 +33,70 @@
         <!--<div class="row"><a-->
         <!--href="https://www.jasondavies.com/wordtree/?source=cat-in-the-hat.txt&prefix=we&reverse=0#And"-->
         <!--class="highlight">And</a> <a-->
-        <!--href="https://www.jasondavies.com/wordtree/?source=cat-in-the-hat.txt&prefix=we&reverse=0#then"-->
-        <!--class="highlight">then</a> <a-->
-        <!--href="https://www.jasondavies.com/wordtree/?source=cat-in-the-hat.txt&prefix=we&reverse=0#something"-->
-        <!--class="highlight">something</a> <a-->
-        <!--href="https://www.jasondavies.com/wordtree/?source=cat-in-the-hat.txt&prefix=we&reverse=0#went"-->
-        <!--class="highlight">went</a> <a-->
-        <!--href="https://www.jasondavies.com/wordtree/?source=cat-in-the-hat.txt&prefix=we&reverse=0#BUMP"-->
-        <!--class="highlight">BUMP</a></div>-->
-        <!--<div class="row"><a href="https://www.jasondavies.com/wordtree/?source=cat-in-the-hat.txt&prefix=we&reverse=0#!"-->
     </div>
-    <div class="after" style="height: 4500px;"></div>
+<!--     <div class="after" style="height: 4500px;"></div> -->
 </div>
 
-
-<div id="help-left">
-    Shift-click to make that word the root.
-
-    <p>fd</p>
-
-    <p>fd</p>
-
-    <p>fd</p>
-
-    <p>fd</p>
-
-    <p>fd</p>
-
-    <p>fd</p>
-
-    <p>fd</p>
-
-    <p>fd</p>
-
-    <p>fd</p>
-
-    <p>fd</p>
-
-    <p>fd</p>
-
-    <p>fd</p>
-
-    <p>fd</p>
-
-</div>
+<div id="help-left"></div>
 <!--<div id="heat"></div>-->
 
 <script src="lib/d3.min.js"></script>
 <script src="uncleaned_word_tree.js"></script>
 
 
-<!-- This script does the heavy-lifting of rendering SVG. -->
 <script type="text/javascript" src="lib/jdls/viz/viz.js"></script>
-
-<!--
-    This code controls the UI and generates the object graph.
-    I've left it unminified so you can easily explore it. (It's small enough.)
-    For tests and more, see https://github.com/jamesshore/object_playground .
--->
 <link rel="stylesheet" type="text/css" href="lib/jdls/site.css">
 <script type="text/javascript" src="lib/jdls/object_node.js"></script>
 <script type="text/javascript" src="lib/jdls/object_graph.js"></script>
 <script type="text/javascript" src="lib/jdls/viz_visualizer.js"></script>
 <script type="text/javascript" src="lib/jdls/user_code.js"></script>
 <script type="text/javascript" src="lib/jdls/ui.js"></script>
-
 <script>
 
-    document.addEventListener("DOCContentLoaded", function (event) {
-//        jdls.ui.initialize({
-//            preloadDiv: document.getElementById("playgroundPreload"),
-//            errorDiv: document.getElementById("playgroundError"),
-//            contentDiv: document.getElementById("playgroundContent"),
-//            samplesList: document.getElementById("samples"),
-//            userCodeTextArea: document.getElementById("usercode"),
-//            evaluateButton: document.getElementById("evaluate"),
-//            showBuiltinsCheckbox: document.getElementById("builtins"),
-//            showAllFunctionsCheckbox: document.getElementById("functions"),
-//            graphDiv: document.getElementById("graph")
-//        });
+document.addEventListener("DOMContentLoaded", function (event) {
+    jdls.ui.initialize({
+        preloadDiv: document.getElementById("playgroundPreload"),
+        errorDiv: document.getElementById("playgroundError"),
+        contentDiv: document.getElementById("playgroundContent"),
+        samplesList: document.getElementById("samples"),
+        userCodeTextArea: document.getElementById("usercode"),
+        evaluateButton: document.getElementById("evaluate"),
+        showBuiltinsCheckbox: document.getElementById("builtins"),
+        showAllFunctionsCheckbox: document.getElementById("functions"),
+        graphDiv: document.getElementById("graph")
     });
+});
 
 </script>
-<div id="playgroundPreload" style="display: none;">
-    <div class="content">
-        <div class="content_box">
-            <div class="notification">
-                <h2 class="highlight">Loading...</h2>
-            </div>
-        </div>
-    </div>
-</div>
-<div id="playgroundError" style="display: none;">
-    <div class="content">
-        <div class="content_box">
-            <div class="notification">
-                <h2 class="highlight">Unable to Load Object Visualizer</h2>
+<!-- <div id="playgroundPreload" style="display: none;"><div class="content"><div class="content_box"><div class="notification"><h2 class="highlight">Loading...</h2>
+</div></div></div></div> -->
+<!-- <div id="playgroundError" style="display: none;"><div class="content"><div class="content_box"><div class="notification"><h2 class="highlight">Unable to Load Object Visualizer</h2>
+</div></div></div></div> -->
 
-                <p>Your browser doesn’t support the JavaScript functions required. The latest versions of Chrome,
-                    Firefox, and Safari are known to work, and Internet Explorer 10 does too. Try one of them
-                    instead.</p>
-            </div>
-        </div>
-    </div>
-</div>
 <div id="playgroundContent" style="display: block;">
-    <ul id="samples" class="tab_navigation col-1-5 objects">
-        <!-- This list is automatically populated by the JavaScript code -->
-        <li><a>Instructions</a></li>
-        <li><a>Basic Class</a></li>
-        <li><a>Classical Inheritance</a></li>
-        <li><a>Resig Inheritance</a></li>
-        <li><a>Inception!</a></li>
-    </ul>
+    <ul id="samples" class="tab_navigation col-1-5 objects">    </ul><!-- This list is automatically populated by the JavaScript code --><!--         <li><a>Instructions</a></li>        <li><a>Basic Class</a></li>        <li><a>Classical Inheritance</a></li>        <li><a>Resig Inheritance</a></li>        <li><a>Inception!</a></li> -->
     <div class="content">
         <div class="content_box">
             <div class="main codearea">
-                <div class="col-3-4">
-                    <textarea id="usercode"></textarea>
-                </div>
+                <div class="col-3-4"><textarea id="usercode"></textarea></div>
                 <div class="col-1-4">
                     <div class="aside">
-                        <table>
-                            <tbody>
-                            <tr>
-                                <td><input id="builtins" type="checkbox"></td>
-                                <td><label for="builtins">Show standard objects</label></td>
-                            </tr>
-                            <tr>
-                                <td><input id="functions" type="checkbox"></td>
-                                <td><label for="functions">Show all functions</label></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                        <table><tbody>
+                                <tr><td><input id="builtins" type="checkbox"></td><td><label for="builtins">Show standard objects</label></td></tr>
+                                <tr><td><input id="functions" type="checkbox"></td><td><label for="functions">Show all functions</label></td></tr>
+                        </tbody></table>
                     </div>
                     <input type="submit" id="evaluate" class="button" value="Click to Evaluate">
                 </div>
             </div>
             <div class="wrapper superwide graph">
-                <div id="graph"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
-
-                    <!-- Generated by graphviz version 2.28.0 (20110507.0327)
-                     -->
-                    <!-- Title: g Pages: 1 -->
-                    <svg width="266pt" height="179pt" viewBox="0.00 0.00 266.00 179.00"
-                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 175)">
-                            <title>g</title>
-                            <polygon fill="white" stroke="white" points="-4,5 -4,-175 263,-175 263,5 -4,5"></polygon>
-                            <!-- node0 -->
-                            <g id="node1" class="node"><title>node0</title>
-
-                            </g>
-                            <!-- node2 -->
-                            <g id="node2" class="node"><title>node2</title>
-
-                            </g>
-                            <!-- node0&#45;&gt;node2 -->
-                            <g id="edge2" class="edge"><title>node0:f6-&gt;node2:title</title>
-
-                            </g>
-                        </g>
-                    </svg>
-                </div>
+                <!-- Generated by graphviz version 2.28.0 (20110507.0327)-->
+                <div id="graph"><svg></svg></div>
             </div>
         </div>
     </div>
 </div>
 
-<ul id="samples" class="tab_navigation col-1-5 objects">
-    <!-- This list is automatically populated by the JavaScript code -->
-    <li><a>Instructions</a></li><li><a>Basic Class</a></li><li><a>Classical Inheritance</a></li><li><a>Resig Inheritance</a></li><li><a>Inception!</a></li></ul>
-<textarea id="usercode"></textarea>
-
-<input type="submit" id="evaluate" class="button" value="Click to Evaluate">
-
-<input id="builtins" type="checkbox">
-
-<input id="functions" type="checkbox">
-
-<div id="graph"><!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
-
-    <!-- Generated by graphviz version 2.28.0 (20110507.0327)
-     -->
-    <!-- Title: g Pages: 1 -->
-    <svg width="266pt" height="179pt" viewBox="0.00 0.00 266.00 179.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        <g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 175)">
-            <title>g</title>
-            <polygon fill="white" stroke="white" points="-4,5 -4,-175 263,-175 263,5 -4,5"></polygon>
-            <!-- node0 -->
-
-        </g>
-    </svg>
-</div>
 
 
 
