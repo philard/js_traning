@@ -32,14 +32,6 @@ function processText(e) {
 }
 
 
-function decodeEntity(e) {
-    return entity.innerHTML = e, entity.textContent
-}
-
-function proxy(e, t) {
-    d3.xhr("//www.jasondavies.com/xhr?url=" + encodeURIComponent(e), t)
-}
-
 function url(e, t) {
     var n = [],
         r = {};
@@ -49,17 +41,10 @@ function url(e, t) {
     history[t ? "pushState" : "replaceState"](null, null, "?" + n.join("&"))
 }
 
-function urlParams(e) {
-    var t = {};
-    return e && e.split(/&/g).forEach(function(e) {
-        e = e.split("="), t[decodeURIComponent(e[0])] = decodeURIComponent(e[1])
-    }), t
-}
-
 function change() {
     if (!location.search) return showHelp(), void 0;
     var e = state ? state.source : null;
-    if (state = urlParams(location.search.substr(1)), state.source !== e && state.source) {
+    if (state = io.urlParams(location.search.substr(1)), state.source !== e && state.source) {
         source.property("value", state.source), 
         io.getURL(state.source, function(e) {
             processText(e)
@@ -426,64 +411,8 @@ var width, height, tree = wordtree().on("prefix", function(e) {
             return e.whitespace && this.parentNode.insertBefore(document.createTextNode(" "), this), e.token
         }), t.classed("highlight", highlight)
     });
-d3.select("#paste-go").on("click", function() {
-    url(state = {
-        source: ""
-    }, !0), d3.select("#paste-save").property("checked") && d3.text("save").post(d3.select("#paste").property("value"), function(e, t) {
-        e ? alert("An error occurred when attempting to save your text for sharing!") : url({
-            source: state.source = t
-        })
-    }), processText(d3.select("#paste").property("value"))
-});
-var div = d3.select("#examples").selectAll("div.thumb").data([{
-    name: "Obama\u2019s Inauguration Speech",
-    source: "obama.inauguration.2013.txt",
-    prefix: "We"
-}, {
-    name: "The Cat in the Hat",
-    source: "cat-in-the-hat.txt",
-    prefix: "Thing"
-}, {
-    name: "Alice in Wonderland",
-    source: "alice-in-wonderland.txt",
-    prefix: "cried"
-}, {
-    name: "Bob Dylan\u2019s Blowin\u2019 in the Wind",
-    source: "blowin.in.the.wind.txt",
-    prefix: "How"
-}, {
-    name: "Obama War Speech",
-    source: "obama-war-speech.txt",
-    prefix: "Iraq",
-    reverse: 1
-}, {
-    name: "Steve Jobs Stanford Commencement Speech",
-    source: "steve-jobs-commencement.txt",
-    prefix: "life",
-    reverse: 1
-}, {
-    name: "@jasondavies",
-    source: "@jasondavies",
-    prefix: "@",
-    "phrase-line": 1
-}, {
-    name: "Flickr Comments",
-    source: "flickr-comments.txt",
-    prefix: "Thank you"
-}]).each(function(e) {
-    var t = [];
-    for (var n in e) "name" !== n && t.push(encodeURIComponent(n) + "=" + encodeURIComponent(e[n]));
-    e.url = "./?" + t.join("&")
-});
-div.append("a").attr("href", function(e) {
-    return e.url
-}).each(function() {
-    this.appendChild(this.parentNode.firstChild)
-}), div.append("a").attr("href", function(e) {
-    return e.url
-}).text(function(e) {
-    return e.name
-}), d3.select("#examples").append("div").attr("class", "clear");
+
+
 var re = new RegExp("[" + unicodePunctuationRe + "]|\\d+|[^\\d" + unicodePunctuationRe + "0000-001F007F-009F002000A01680180E2000-200A20282029202F205F3000".replace(/\w{4}/g, "\\u$&") + "]+", "g"),
     vis = d3.select("#vis"),
     svg = vis.append("svg"),

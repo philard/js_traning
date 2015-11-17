@@ -4,6 +4,12 @@
 window.io = (function() {
   var exports = {};
 
+  exports.urlParams = function urlParams(e) {
+    var t = {};
+    return e && e.split(/&/g).forEach(function(e) {
+      e = e.split("="), t[decodeURIComponent(e[0])] = decodeURIComponent(e[1])
+    }), t
+  }
 
   exports.getURL = function getURL(e, t) {
     function n(e, n) {
