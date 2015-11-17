@@ -8,6 +8,11 @@ window.uiFeats = (function(){
         return e.tokens[0].line - 3
     }
 
+
+    exports.clearHighlight = function clearHighlight() {
+        for (var e = -1; ++e < tokens.length;) tokens[e].highlight = !1
+    }
+
     exports.highlightTokens = function highlightTokens(e, t) {
         if (e && e.children && e.children.length) {
             t += e.tokens.length;
@@ -24,6 +29,18 @@ window.uiFeats = (function(){
             }
         }
     }
+
+
+    function hoverKey() {
+        svg.classed("hover", d3.event.shiftKey)
+    }
+    
+
+    d3.select("#form").on("submit", function() {
+        d3.event.preventDefault();
+        url({prefix: keyword.property("value")});
+        change();
+    });
 
 
     return exports;

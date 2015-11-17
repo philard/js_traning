@@ -64,7 +64,7 @@ function change() {
 
 
 function refreshText(e) {
-    clearHighlight();
+    uiFeats.clearHighlight();
     for (var t = e, n = 0; t;) {
         n += t.tokens.length;
         t = t.parent;
@@ -74,14 +74,8 @@ function refreshText(e) {
     }
 }
 
-function clearHighlight() {
-    for (var e = -1; ++e < tokens.length;) tokens[e].highlight = !1
-}
 
 
-function highlight(e) {
-    return e.highlight
-}
 
 
 function scroll() {
@@ -384,6 +378,11 @@ var width, height, tree = wordtree().on("prefix", function(e) {
     });
 
 
+function highlight(e) {
+    return e.highlight
+}
+
+
 var re = new RegExp("[" + unicodePunctuationRe + "]|\\d+|[^\\d" + unicodePunctuationRe + "0000-001F007F-009F002000A01680180E2000-200A20282029202F205F3000".replace(/\w{4}/g, "\\u$&") + "]+", "g"),
     vis = d3.select("#vis"),
     svg = vis.append("svg"),
@@ -397,11 +396,16 @@ var re = new RegExp("[" + unicodePunctuationRe + "]|\\d+|[^\\d" + unicodePunctua
     state = {},
     tokens, selectedLines = [];
 
-d3.select(window).on("keydown.hover", hoverKey).on("keyup.hover", hoverKey).on("resize", resize).on("popstate", change), change(), resize(), d3.select("#form").on("submit", function() {
-    d3.event.preventDefault(), url({
-        prefix: keyword.property("value")
-    }), change()
-}), d3.select("#form-source").on("submit", function() {
+d3.select(window)
+    .on("keydown.hover", hoverKey)
+    .on("keyup.hover", hoverKey)
+    .on("resize", resize)
+    .on("popstate", change), change(), resize();
+
+    
+
+
+d3.select("#form-source").on("submit", function() {
     d3.event.preventDefault(), url({
         source: source.property("value"),
         prefix: ""
