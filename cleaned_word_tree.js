@@ -62,34 +62,22 @@ function change() {
 }
 
 
-function currentLine(e) {
-    if (!e) return 0;
-    for (var t = e.children; t && t.length;) e = t[0], t = e.children;
-    return e.tokens[0].line - 3
-}
 
 function refreshText(e) {
     clearHighlight();
-    for (var t = e, n = 0; t;) n += t.tokens.length, t = t.parent;
-    selectedLines = [], highlightTokens(e, n), text.call(textViewer.position(currentLine(e)))
+    for (var t = e, n = 0; t;) {
+        n += t.tokens.length;
+        t = t.parent;
+        selectedLines = [];
+        uiFeats.highlightTokens(e, n); 
+        text.call(textViewer.position(uiFeats.currentLine(e)));
+    }
 }
 
 function clearHighlight() {
     for (var e = -1; ++e < tokens.length;) tokens[e].highlight = !1
 }
 
-function highlightTokens(e, t) {
-    if (e)
-        if (e.children && e.children.length) t += e.tokens.length, e.children.forEach(function(e) {
-            highlightTokens(e, t)
-        });
-        else {
-            e.tokens.forEach(function(e) {
-                e.highlight = !0
-            });
-            for (var n = e.tokens[0].index, r = Math.max(0, n - t); n >= r; r++) tokens[r].highlight = !0, selectedLines.push(tokens[r].line)
-        }
-}
 
 function highlight(e) {
     return e.highlight
