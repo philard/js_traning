@@ -47,7 +47,7 @@ function change() {
         source.property("value", state.source), 
         io.getURL(state.source, function(e) {
             processText(e)
-        }), hideHelp();
+        });
     }
     else if (tokens && tokens.length) {
         var t = state.prefix;
@@ -57,17 +57,10 @@ function change() {
             return e.index - t.index
         } : function(e, t) {
             return t.count - e.count || e.index - t.index
-        }).reverse(+state.reverse).phraseLine(+state["phrase-line"]).prefix(t)), refreshText(tree.root()), hideHelp()
+        }).reverse(+state.reverse).phraseLine(+state["phrase-line"]).prefix(t)), refreshText(tree.root())
     }
 }
 
-function showHelp() {
-    d3.selectAll("#help-window, #form-source").style("display", null), d3.selectAll("#form, #reverse-wrapper").style("display", null)
-}
-
-function hideHelp() {
-    d3.selectAll("#help-window, #form-source").style("display", "none"), d3.selectAll("#form, #reverse-wrapper").style("display", "inline-block")
-}
 
 function currentLine(e) {
     if (!e) return 0;
@@ -409,7 +402,7 @@ var re = new RegExp("[" + unicodePunctuationRe + "]|\\d+|[^\\d" + unicodePunctua
     clip = svg.append("defs").append("clipPath").attr("id", "clip").append("rect"),
     treeG = svg.append("g").attr("transform", "translate(0,20)").attr("clip-path", "url(#clip)"),
     lines = [],
-    text = d3.select("#text").on("scroll", scroll),
+    text = d3.select("#text"),
     hits = d3.select("#hits"),
     keyword = d3.select("#keyword"),
     source = d3.select("#source"),
