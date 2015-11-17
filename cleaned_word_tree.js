@@ -31,19 +31,6 @@ function processText(e) {
     lines.push(i), text.call(textViewer.size(lines.length)), tree.tokens(tokens), change()
 }
 
-function getURL(e, t) {
-    function n(e, n) {
-        t(/^text\/html\b/.test(n.getResponseHeader("Content-Type")) ? n.responseText.replace(/<script[^>]*>([\S\s]*?)<\/script>/gim, "").replace(/<style[^>]*>([\S\s]*?)<\/style>/gim, "").replace(/<head[^>]*>([\S\s]*?)<\/head>/gim, "").replace(/<[^>]*?>/gm, " ").replace(/&#?\w+;/g, decodeEntity) : n.responseText)
-    }
-    if ("https:" === location.protocol && /^http:/.test(e)) proxy(e, n);
-    else try {
-        d3.xhr(e, function(t, r) {
-            t ? proxy(e, n) : n(t, r)
-        })
-    } catch (r) {
-        proxy(e, n)
-    }
-}
 
 function decodeEntity(e) {
     return entity.innerHTML = e, entity.textContent
@@ -74,7 +61,7 @@ function change() {
     var e = state ? state.source : null;
     if (state = urlParams(location.search.substr(1)), state.source !== e && state.source) {
         source.property("value", state.source), 
-        getURL(state.source, function(e) {
+        io.getURL(state.source, function(e) {
             processText(e)
         }), hideHelp();
     }
