@@ -1,11 +1,10 @@
 function resize() {
     width = vis.node().clientWidth,
     height = window.innerHeight - 50 - 0, 
-    heatmap.attr("transform", "translate(" + (width - 20.5) + ",.5)").select("rect.frame").attr("height", 
-    height - 1), svg.attr("width", width).attr("height", height), 
+    svg.attr("width", width).attr("height", height),
     clip.attr("width", width - 30.5).attr("height", height), 
     treeG.call(tree.width(width - 30).height(height - 20)), 
-    updateHeatmap(), text.call(textViewer)
+    text.call(textViewer)
 }
 
 function processText(e) {
@@ -79,7 +78,7 @@ function currentLine(e) {
 function refreshText(e) {
     clearHighlight();
     for (var t = e, n = 0; t;) n += t.tokens.length, t = t.parent;
-    selectedLines = [], highlightTokens(e, n), updateHeatmap(), text.call(textViewer.position(currentLine(e)))
+    selectedLines = [], highlightTokens(e, n), text.call(textViewer.position(currentLine(e)))
 }
 
 function clearHighlight() {
@@ -103,15 +102,6 @@ function highlight(e) {
     return e.highlight
 }
 
-function updateHeatmap() {
-    var e = heatmap.selectAll("line").data(selectedLines),
-        t = textViewer.size();
-    e.enter().insert("line", "rect").attr("x2", 20), e.attr("transform", function(e) {
-        return "translate(0," + height * e / t + ")"
-    }), e.exit().remove();
-    var n = page.datum();
-    n.h = Math.min(height, Math.max(10, height * height / (textViewer.rowHeight() * lines.length))), page.attr("height", n.h - 1)
-}
 
 function scroll() {
     var e = page.datum();
@@ -418,7 +408,6 @@ var re = new RegExp("[" + unicodePunctuationRe + "]|\\d+|[^\\d" + unicodePunctua
     svg = vis.append("svg"),
     clip = svg.append("defs").append("clipPath").attr("id", "clip").append("rect"),
     treeG = svg.append("g").attr("transform", "translate(0,20)").attr("clip-path", "url(#clip)"),
-    heatmap = svg.append("g"),
     lines = [],
     text = d3.select("#text").on("scroll", scroll),
     hits = d3.select("#hits"),
@@ -426,10 +415,7 @@ var re = new RegExp("[" + unicodePunctuationRe + "]|\\d+|[^\\d" + unicodePunctua
     source = d3.select("#source"),
     state = {},
     tokens, selectedLines = [];
-heatmap.append("rect").attr("class", "frame").attr("width", 20);
-var page = heatmap.append("rect").datum({
-    y: 0
-}).attr("class", "page").attr("width", 20).call(d3.behavior.drag().origin(Object).on("drag", drag));
+
 d3.select(window).on("keydown.hover", hoverKey).on("keyup.hover", hoverKey).on("resize", resize).on("popstate", change), change(), resize(), d3.select("#form").on("submit", function() {
     d3.event.preventDefault(), url({
         prefix: keyword.property("value")
