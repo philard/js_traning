@@ -1,7 +1,7 @@
 /**
  * Created by Philip_John_Ardley on 17-Nov-15.
  */
-window.wtIo = (function() {
+window.WtIo = (function() {
   var exports = {};
 
   exports.urlParams = function urlParams(e) {
@@ -26,5 +26,5 @@ window.wtIo = (function() {
   }
 
   return exports;
-})()
+})();
 

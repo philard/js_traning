@@ -36,13 +36,13 @@ exports.highlightTokens = function highlightTokens(e, t) {
 d3.select("#form").on("submit", function() {
     d3.event.preventDefault();
     exports.url({prefix: keyword.property("value")});
-    change();
+    WtInit.change();
 });
 
 d3.select("#form-source").on("submit", function() {
     d3.event.preventDefault();
     exports.url({source: source.property("value"),prefix: ""}, !0);
-    change()
+    WtInit.change()
 });
 
 //START useless stuff
@@ -64,7 +64,7 @@ function resize() {
     height = window.innerHeight - 50 - 0, 
     svg.attr("width", width).attr("height", height),
     clip.attr("width", width - 30.5).attr("height", height), 
-    treeG.call(tree.width(width - 30).height(height - 20)), 
+    treeG.call(WtInit.tree.width(width - 30).height(height - 20)), 
     text.call(textViewer)
 }
 //END useless stuff
@@ -76,6 +76,7 @@ d3.select("#phrase-line").property("checked", +state["phrase-line"]).on("change"
     change();
 });
 
+//sets the URL to enable reloading presering the state
 exports.url = function url(e, t) {
     var n = [],
         r = {};
