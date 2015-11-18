@@ -35,14 +35,13 @@ exports.highlightTokens = function highlightTokens(e, t) {
 
 d3.select("#form").on("submit", function() {
     d3.event.preventDefault();
-    url({prefix: keyword.property("value")});
+    exports.url({prefix: keyword.property("value")});
     change();
 });
 
 d3.select("#form-source").on("submit", function() {
-    debugger;//ye
     d3.event.preventDefault();
-    url({source: source.property("value"),prefix: ""}, !0);
+    exports.url({source: source.property("value"),prefix: ""}, !0);
     change()
 });
 
@@ -51,7 +50,9 @@ d3.select(window)
     .on("keydown.hover", hoverKey)
     .on("keyup.hover", hoverKey)
     .on("resize", resize)
-    .on("popstate", change), change(), resize();
+    .on("popstate", wtInit.change);
+    wtInit.change();
+    resize();
 
 
 function hoverKey() {
@@ -71,7 +72,7 @@ function resize() {
     
 // one phrase per line checkbox
 d3.select("#phrase-line").property("checked", +state["phrase-line"]).on("change", function() {
-    url({"phrase-line": this.checked ? 1 : 0});
+    exports.url({"phrase-line": this.checked ? 1 : 0});
     change();
 });
 
@@ -82,7 +83,19 @@ exports.url = function url(e, t) {
     for (var i in e) r[i] = e[i];
     for (var i in r) n.push(encodeURIComponent(i) + "=" + encodeURIComponent(r[i]));
     history[t ? "pushState" : "replaceState"](null, null, "?" + n.join("&"))
-}
+};
+
+
+exports.refreshText = function refreshText(e) {
+    exports.clearHighlight();
+    for (var t = e, n = 0; t;) {
+        n += t.tokens.length;
+        t = t.parent;
+        selectedLines = [];
+        exports.highlightTokens(e, n);
+        text.call(textViewer.position(uiFeats.currentLine(e)));
+    }
+};
 
 return exports;
 })();

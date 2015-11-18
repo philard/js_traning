@@ -21,44 +21,15 @@ function processText(e) {
         };
         tokens.push(s), i.push(s), n = re.lastIndex
     }
-    lines.push(i), text.call(textViewer.size(lines.length)), tree.tokens(tokens), change()
+    lines.push(i), text.call(textViewer.size(lines.length)), tree.tokens(tokens), wtInit.change()
 }
 
 
 
 
-function change() {
-    if (!location.search) return showHelp(), void 0;
-    var prevStateSource = state ? state.source : null;
-    state = io.urlParams(location.search.substr(1));
-    if (state.source && state.source !== prevStateSource ) { //The change has been to the URL
-        source.property("value", state.source), 
-        io.getURL(state.source, function(e) { processText(e) });
-    }
-    else if (tokens && tokens.length) { //The change has not been to the URL
-        var t = state.prefix;
-        t || uiFeats.url({
-            prefix: t = tokens[0].token
-        }), keyword.property("value", t).node().select(), t = t.toLowerCase().match(re), treeG.call(tree.sort("occurrence" === state.sort ? function(e, t) {
-            return e.index - t.index
-        } : function(e, t) {
-            return t.count - e.count || e.index - t.index
-        }).reverse(+state.reverse).phraseLine(+state["phrase-line"]).prefix(t)), refreshText(tree.root())
-    }
-}
 
 
 
-function refreshText(e) {
-    uiFeats.clearHighlight();
-    for (var t = e, n = 0; t;) {
-        n += t.tokens.length;
-        t = t.parent;
-        selectedLines = [];
-        uiFeats.highlightTokens(e, n); 
-        text.call(textViewer.position(uiFeats.currentLine(e)));
-    }
-}
 
 
 
@@ -332,7 +303,7 @@ var width, height, tree = wordtree().on("prefix", function(e) {
         var t = state.prefix = e.keyword;
         keyword.property("value", t), uiFeats.url({
             prefix: t
-        }), refreshText(e.tree)
+        }), uiFeats.refreshText(e.tree)
     }),
     textViewer = d3.longscroll().render(function(e) {
         var t = e.selectAll("a").data(function(e) {
