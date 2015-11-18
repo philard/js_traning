@@ -128,7 +128,7 @@ input {
 }
 
 #form {
-    display: none;
+    /* display: none; */
 }
 
 .left {
@@ -210,7 +210,7 @@ h2 {
 
 .wrapper {
     width: 800px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     text-align: justify;
 }
 

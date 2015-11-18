@@ -164,8 +164,8 @@ input[type='submit'] {
 
 .wrapper {
   width: 830px;
-  margin: auto;
-  position: relative;
+  /* margin: auto; */
+  /* position: relative; */
 }
 
 .wrapper.narrow {
