@@ -21,7 +21,7 @@ function processText(e) {
         };
         tokens.push(s), i.push(s), n = re.lastIndex
     }
-    lines.push(i), text.call(textViewer.size(lines.length)), tree.tokens(tokens), wtInit.change()
+    lines.push(i), text.call(textViewer.size(lines.length)), tree.tokens(tokens), WtInit.change()
 }
 
 
@@ -81,9 +81,9 @@ var height;
 var tree = wordtree().on("prefix", function(e) {
     text.call(textViewer);
     var t = state.prefix = e.keyword;
-    keyword.property("value", t), uiFeats.url({
+    keyword.property("value", t), UiFeats.url({
         prefix: t
-    }), uiFeats.refreshText(e.tree)
+    }), UiFeats.refreshText(e.tree)
 });
 
 
@@ -96,7 +96,7 @@ var textViewer = d3.longscroll().render(function(e) {
         t.enter().append("a").attr("href", function(e) {
             return "#" + encodeURIComponent(e.token)
         }).on("click", function(e) {
-            d3.event.preventDefault(), uiFeats.url({
+            d3.event.preventDefault(), UiFeats.url({
                 prefix: e.token
             }), change()
         }).text(function(e) {
@@ -116,7 +116,7 @@ var re = new RegExp("[" + unicodePunctuationRe + "]|\\d+|[^\\d" + unicodePunctua
     vis = d3.select("#vis"),
     svg = vis.append("svg"),
     clip = svg.append("defs").append("clipPath").attr("id", "clip").append("rect"),
-    treeG = svg.append("g").attr("transform", "translate(0,20)").attr("clip-path", "url(#clip)"),//WTF. needs uiFeats.url or url...
+    treeG = svg.append("g").attr("transform", "translate(0,20)").attr("clip-path", "url(#clip)"),//WTF. needs UiFeats.url or url...
     lines = [],
     text = d3.select("#text"),
     hits = d3.select("#hits"),
