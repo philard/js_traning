@@ -97,5 +97,8 @@ exports.refreshText = function refreshText(e) {
     }
 };
 
+
+
+
 return exports;
 })();

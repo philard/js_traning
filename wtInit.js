@@ -18,7 +18,7 @@ exports.change = function change() {
       processText(e);
     });
   }
-  else if (tokens && tokens.length) { //The change is not in the URL
+  else if (tokens && tokens.length) {         //The change is not in the URL
     var t = state.prefix;
     t || uiFeats.url({
       prefix: t = tokens[0].token
@@ -28,7 +28,10 @@ exports.change = function change() {
       return t.count - e.count || e.index - t.index
     }).reverse(+state.reverse).phraseLine(+state["phrase-line"]).prefix(t)), uiFeats.refreshText(tree.root())
   }
-}
+};
+
+window.wordtree = wtCore();
+
 
 return exports;
 })();
