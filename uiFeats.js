@@ -64,10 +64,11 @@ function resize() {
     height = window.innerHeight - 50 - 0, 
     svg.attr("width", width).attr("height", height),
     clip.attr("width", width - 30.5).attr("height", height), 
-    treeG.call(WtInit.tree.width(width - 30).height(height - 20)), 
+    treeG.call(WtInit.tree.width(width - 30).height(height - 20));
     text.call(textViewer)
 }
 //END useless stuff
+
 
     
 // one phrase per line checkbox
