@@ -29,16 +29,13 @@ function processText(e) {
 
 function change() {
     if (!location.search) return showHelp(), void 0;
-    var source = state ? state.source : null;
-
+    var prevStateSource = state ? state.source : null;
     state = io.urlParams(location.search.substr(1));
-    if (state.source !== source && state.source) {
+    if (state.source && state.source !== prevStateSource ) { //The change has been to the URL
         source.property("value", state.source), 
-        io.getURL(state.source, function(e) {
-            processText(e)
-        });
+        io.getURL(state.source, function(e) { processText(e) });
     }
-    else if (tokens && tokens.length) {
+    else if (tokens && tokens.length) { //The change has not been to the URL
         var t = state.prefix;
         t || uiFeats.url({
             prefix: t = tokens[0].token
