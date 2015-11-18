@@ -5,7 +5,7 @@
 
 
 
-window.wtCore = function() {
+window.WtCore = function() {
   var exports;
 
   function t() {

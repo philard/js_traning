@@ -1,5 +1,5 @@
 
-window.uiFeats = (function(){
+window.UiFeats = (function(){
    
 
 var exports = {};
@@ -50,8 +50,8 @@ d3.select(window)
     .on("keydown.hover", hoverKey)
     .on("keyup.hover", hoverKey)
     .on("resize", resize)
-    .on("popstate", wtInit.change);
-    wtInit.change();
+    .on("popstate", WtInit.change);
+    WtInit.change();
     resize();
 
 
@@ -93,7 +93,7 @@ exports.refreshText = function refreshText(e) {
         t = t.parent;
         selectedLines = [];
         exports.highlightTokens(e, n);
-        text.call(textViewer.position(uiFeats.currentLine(e)));
+        text.call(textViewer.position(UiFeats.currentLine(e)));
     }
 };
 
