@@ -81,7 +81,7 @@ d3.select(window)
     WtInit.change();
     resize();
 function hoverKey() {
-    svg.classed("hover", d3.event.shiftKey)
+    exports.svg.classed("hover", d3.event.shiftKey)
 }
 function resize() {
     width = exports.vis.node().clientWidth,
