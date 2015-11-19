@@ -35,27 +35,23 @@ var unicodePunctuationRe = "!-#%-*,-/:;?@\\[-\\]_{}\xa1\xa7\xab\xb6\xb7\xbb\xbf\
 exports.re = new RegExp("[" + unicodePunctuationRe + "]|\\d+|[^\\d" + unicodePunctuationRe + "0000-001F007F-009F002000A01680180E2000-200A20282029202F205F3000".replace(/\w{4}/g, "\\u$&") + "]+", "g");
 var width;
 var height;
+var lines = [];
 
 
-
-
+exports.getLines = function() { return lines; }
 
 
 return exports;
 })();
 
-
-
-
-    var 
-
-      lines = [],
-      text = d3.select("#text"),
-      hits = d3.select("#hits"),
-      keyword = d3.select("#keyword"),
-      source = d3.select("#source"),
-      state = {},
-      tokens, selectedLines = [];
+      
+      var text = d3.select("#text");
+      var hits = d3.select("#hits");
+      var keyword = d3.select("#keyword");
+      var source = d3.select("#source");
+      var state = {};
+      tokens = [];
+      selectedLines = [];
 
 
     var entity = document.createElement("span");

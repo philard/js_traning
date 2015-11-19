@@ -60,7 +60,7 @@ exports.treeG = exports.svg.append("g").attr("transform", "translate(0,20)").att
 exports.textViewer = d3.longscroll().render(textViewerRender);
 function textViewerRender(e) {
     var t = e.selectAll("a").data(function (e) {
-        return lines[e] || []
+        return TextProcessing.getLines()[e] || []
     });
     t.enter().append("a").attr("href", function (e) {
         return "#" + encodeURIComponent(e.token)

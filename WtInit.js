@@ -31,7 +31,7 @@ exports.change = function change() {
   }
   else if (tokens && tokens.length) {         //The change is not in the URL
     var searchTerm = state.prefix;
-    searchTerm = searchTerm || UiFeats.url( {prefix: searchTerm = tokens[0].token } );//Ensure the search erm in defined.
+    searchTerm = searchTerm || UiFeats.url( {prefix: searchTerm = tokens[0].token } );//Ensure the search term in defined.
     keyword.property("value", searchTerm).node().select();
     searchTerm = searchTerm.toLowerCase()
         .match(TextProcessing.re);
