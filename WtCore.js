@@ -6,8 +6,6 @@
 
 
 window.WtCore = function() {
-  var exports;
-
   function t() {
     function wordTreeDef(a) {
       var s = someArray ? someArray.count : 0;
@@ -235,8 +233,9 @@ window.WtCore = function() {
     return t.count - e.count
   }
 
-  exports = t;
-  return exports;
+  t.wordNodes = [];
+
+  return t;
 };
 
 

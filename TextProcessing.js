@@ -16,7 +16,6 @@ window.TextProcessing = (function () {
     var n = 0;
     var r = 0;
     var currentRightBarLineProg = 0;
-      tokens = []
     var testM = text.append("span").text("m").node()
     var lengthOfAnM = testM.offsetWidth;
     testM.remove();
@@ -24,7 +23,6 @@ window.TextProcessing = (function () {
 
 
     //var lines = [];
-    //var wordNodes = [];
     for (var linesIndex = []; bookIterator = exports.re.exec(wholeBook);) {
       var separator = wholeBook.substring(n, bookIterator.index);
       if ((currentRightBarLineProg > maxMsInRightBar) || isNewLineSeparator(separator)) {
@@ -42,16 +40,15 @@ window.TextProcessing = (function () {
         whitespace: separator,
         line: lines.length
       };
-      tokens.push(s), linesIndex.push(s), n = exports.re.lastIndex
-    }
-    lines.push(0), text.call(UiFeats.textViewer.size(lines.length)), WtInit.trees[0].tokens(tokens), WtInit.change()
-  }
-
-  function msInRightBar() {
-    span = text.append("span").text("m");
-    out = 285 / span.node().offsetWidth; //285/(space taken by an "m"...)
-    span.remove();
-    return out;
+      tokens.push(s)
+      wtCoreInstance.wordNodes.push(s);
+      linesIndex.push(s);
+      n = exports.re.lastIndex;
+    }//END loop over wholeBook
+    lines.push(0);
+    text.call(UiFeats.textViewer.size(lines.length));
+    WtInit.trees[0].tokens(wtCoreInstance.wordNodes)
+    WtInit.change()
   }
   function isNewLineSeparator(separator) {
     return (/\r\n\r\n|\r\r|\n\n/.test(separator));

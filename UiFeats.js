@@ -67,7 +67,7 @@ function textViewerRender(e) {
     }).on("click", function (e) {
         d3.event.preventDefault(), UiFeats.url({
             prefix: e.token
-        }), change()
+        }), WtInit.change()
     }).text(function (e) {
         return e.whitespace && this.parentNode.insertBefore(document.createTextNode(" "), this), e.token
     }), t.classed("highlight", function (e) {return e.highlight});
