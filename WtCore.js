@@ -8,6 +8,9 @@
 window.WtCore = function() {
   var exports;
 
+  exports.tokens = [];
+
+
   function t() {
     function wordTreeDef(a) {
       var s = someArray ? someArray.count : 0;

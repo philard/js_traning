@@ -4,7 +4,7 @@ var hits = d3.select("#hits");
 var keyword = d3.select("#keyword");
 var source = d3.select("#source");
 var state = {};
-var tokens = [];
+
 var selectedLines = [];
 
 window.TextProcessing = (function () {
@@ -40,7 +40,7 @@ window.TextProcessing = (function () {
         whitespace: separator,
         line: lines.length
       };
-      tokens.push(s);
+      WtCore.tokens.push(s);
       wordNodes.push(s);
       linesIndex.push(s);
       n = exports.re.lastIndex;
