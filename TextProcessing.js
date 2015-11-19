@@ -1,3 +1,12 @@
+
+var text = d3.select("#text");
+var hits = d3.select("#hits");
+var keyword = d3.select("#keyword");
+var source = d3.select("#source");
+var state = {};
+var tokens = [];
+var selectedLines = [];
+
 window.TextProcessing = (function () {
   var exports = {};
 
@@ -13,6 +22,7 @@ window.TextProcessing = (function () {
 
 
     var lines = [];
+    var wordNodes = [];
     for (var linesIndex = []; bookIterator = exports.re.exec(wholeBook);) {
       var separator = wholeBook.substring(n, bookIterator.index);
       if ((currentRightBarLineProg > maxMsInRightBar) || isNewLineSeparator(separator)) {
@@ -30,10 +40,16 @@ window.TextProcessing = (function () {
         whitespace: separator,
         line: lines.length
       };
-      tokens.push(s), linesIndex.push(s), n = exports.re.lastIndex
-    }
-    lines.push(0), text.call(UiFeats.textViewer.size(lines.length)), WtInit.trees[0].tokens(tokens), WtInit.change()
-  }
+      tokens.push(s);
+      wordNodes.push(s);
+      linesIndex.push(s);
+      n = exports.re.lastIndex;
+    }//END loop over wholeBook
+    lines.push(0);
+    text.call(UiFeats.textViewer.size(lines.length));
+    WtInit.trees[0].tokens(wordNodes);
+    WtInit.change();
+  };
   function isNewLineSeparator(separator) {
     return (/\r\n\r\n|\r\r|\n\n/.test(separator));
   }
@@ -56,13 +72,7 @@ window.TextProcessing = (function () {
 })();
 
 
-var text = d3.select("#text");
-var hits = d3.select("#hits");
-var keyword = d3.select("#keyword");
-var source = d3.select("#source");
-var state = {};
-tokens = [];
-selectedLines = [];
+
 
 
 var entity = document.createElement("span");
