@@ -23,7 +23,7 @@ exports.processText = function processText(e) {
         };
         tokens.push(s), i.push(s), n = exports.re.lastIndex
     }
-    lines.push(i), text.call(textViewer.size(lines.length)), WtInit.tree.tokens(tokens), WtInit.change()
+    lines.push(i), text.call(UiFeats.textViewer.size(lines.length)), WtInit.trees[0].tokens(tokens), WtInit.change()
 }
 
 
@@ -45,30 +45,10 @@ return exports;
 })();
 
 
-    
-var textViewer = d3.longscroll().render(textViewerRender);
-function textViewerRender(e) {
-    var t = e.selectAll("a").data(function (e) {
-        return lines[e] || []
-    });
-    t.enter().append("a").attr("href", function (e) {
-        return "#" + encodeURIComponent(e.token)
-    }).on("click", function (e) {
-        d3.event.preventDefault(), UiFeats.url({
-            prefix: e.token
-        }), change()
-    }).text(function (e) {
-        return e.whitespace && this.parentNode.insertBefore(document.createTextNode(" "), this), e.token
-    }), t.classed("highlight", function (e) {return e.highlight});
-};
-
 
 
     var 
-      vis = d3.select("#vis"),
-      svg = vis.append("svg"),
-      clip = svg.append("defs").append("clipPath").attr("id", "clip").append("rect"),
-      treeG = svg.append("g").attr("transform", "translate(0,20)").attr("clip-path", "url(#clip)"),//WTF. needs UiFeats.url or url...
+
       lines = [],
       text = d3.select("#text"),
       hits = d3.select("#hits"),

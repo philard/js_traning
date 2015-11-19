@@ -1,8 +1,11 @@
 
-window.UiFeats = (function(){
-   
 
+window.UiFeats = (function(){
 var exports = {};
+
+
+
+
 
 exports.currentLine = function currentLine(e) {
     if (!e) return 0;
@@ -45,6 +48,30 @@ d3.select("#form-source").on("submit", function() {
     WtInit.change()
 });
 
+
+
+
+exports.vis = d3.select("#vis")
+exports.svg = exports.vis.append("svg")
+exports.clip = exports.svg.append("defs").append("clipPath").attr("id", "clip").append("rect")
+exports.treeG = exports.svg.append("g").attr("transform", "translate(0,20)").attr("clip-path", "url(#clip)"),//WTF. needs UiFeats.url or url...
+
+
+exports.textViewer = d3.longscroll().render(textViewerRender);
+function textViewerRender(e) {
+    var t = e.selectAll("a").data(function (e) {
+        return lines[e] || []
+    });
+    t.enter().append("a").attr("href", function (e) {
+        return "#" + encodeURIComponent(e.token)
+    }).on("click", function (e) {
+        d3.event.preventDefault(), UiFeats.url({
+            prefix: e.token
+        }), change()
+    }).text(function (e) {
+        return e.whitespace && this.parentNode.insertBefore(document.createTextNode(" "), this), e.token
+    }), t.classed("highlight", function (e) {return e.highlight});
+};
 //START useless stuff
 d3.select(window)
     .on("keydown.hover", hoverKey)
@@ -53,21 +80,19 @@ d3.select(window)
     .on("popstate", WtInit.change);
     WtInit.change();
     resize();
-
-
 function hoverKey() {
     svg.classed("hover", d3.event.shiftKey)
 }
-
 function resize() {
-    width = vis.node().clientWidth,
+    width = exports.vis.node().clientWidth,
     height = window.innerHeight - 50 - 0, 
-    svg.attr("width", width).attr("height", height),
-    clip.attr("width", width - 30.5).attr("height", height), 
-    treeG.call(WtInit.tree.width(width - 30).height(height - 20));
-    text.call(textViewer)
+    exports.svg.attr("width", width).attr("height", height),
+    exports.clip.attr("width", width - 30.5).attr("height", height), 
+    exports.treeG.call(WtInit.trees[0].width(width - 30).height(height - 20));
+    text.call(exports.textViewer)
 }
 //END useless stuff
+
 
 
     
@@ -95,7 +120,7 @@ exports.refreshText = function refreshText(e) {
         t = t.parent;
         selectedLines = [];
         exports.highlightTokens(e, n);
-        text.call(textViewer.position(UiFeats.currentLine(e)));
+        text.call(UiFeats.textViewer.position(UiFeats.currentLine(e)));
     }
 };
 
@@ -104,3 +129,5 @@ exports.refreshText = function refreshText(e) {
 
 return exports;
 })();
+
+
