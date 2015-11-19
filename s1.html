@@ -6,15 +6,23 @@
     <link href="main.css" rel="stylesheet"/>
 </head>
 <body>
-<a href="s1.html?source=texts/cat-in-the-hat.txt&prefix=one">ex1</a>
+<div class="center welcome">
+    <p>The word tree visulisation was taken from a minified demo <a href="https://www.jasondavies.com/wordtree/">here</a>.
+        90% effort effort was put toward refactoring it to the point where I found the list of word nodes.
+        To prove this is a list of word nodes I feed it into the (lower) JDLS data structure visualizer. (Sorry for the crappy CSS)  </p>
+
+</div>
+<a href="s1.html?source=texts/cat-in-the-hat.txt&prefix=one">Open The Cat In The hat. </a>
+<a href="s1.html?source=texts/The-Very-Hungry-Caterpillar.txt&prefix=the">Open The Very Hungry Catepillar. </a>
+<a href="s1.html?source=texts/Hitch%20Hicker's%20Guide%20to%20the%20Galaxy.txt&prefix=the">Open Hitch Hicker's Guide to the Galaxy. </a>
+
 <div id="header">
     <div class="wrapper">
-        <h1 id="logo"><a href="https://www.jasondavies.com/wordtree/">Word Tree</a></h1>
+        <h1 id="logo"><a href="https://www.jasondavies.com/wordtree/">Word Tree search</a> </h1>
 
         <form id="form-source">
             <input type="text" id="source" placeholder="URL or Twitter @handle…">
         </form>
-
         <form id="form" style="display: inline-block;">
             <input type="text" id="keyword" placeholder="Keyword…">
             <label for="reverse" style="font-size: small"><input id="reverse" type="checkbox"> reverse tree</label>
@@ -22,6 +30,7 @@
                 line</label>
         </form>
     </div>
+    (Tip: Crtl+click a word to change search term.)
 </div>
 
 

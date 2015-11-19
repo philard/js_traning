@@ -40,7 +40,7 @@ window.TextProcessing = (function () {
         whitespace: separator,
         line: lines.length
       };
-      tokens.push(s)
+      tokens = 'hahahahhaa';//.push(s)
       wtCoreInstance.wordNodes.push(s);
       linesIndex.push(s);
       n = exports.re.lastIndex;
@@ -48,8 +48,10 @@ window.TextProcessing = (function () {
     lines.push(0);
     text.call(UiFeats.textViewer.size(lines.length));
     WtInit.trees[0].tokens(wtCoreInstance.wordNodes)
-    WtInit.change()
-  }
+    WtInit.change();//moves changes from "wtCoreInstance.wordNodes" into (...somewhere) and then renders the UI.
+    
+  }//END exports.processText
+
   function isNewLineSeparator(separator) {
     return (/\r\n\r\n|\r\r|\n\n/.test(separator));
   }

@@ -170,9 +170,9 @@ window.WtCore = function() {
         }
       }),
       U = 0;
-    return wordTreeDef.tokens = function(t) {
+    return wordTreeDef.tokens = function(thisWordNodes) {
       if (!arguments.length) return _;
-      _ = t, w = {};
+      _ = thisWordNodes, w = {};
       for (var n, r = 0, i = _.length; i > r; ++r) n = M.call(wordTreeDef, _[r], r), (w.hasOwnProperty(n) ? w[n] : w[n] = []).push(r);
       return wordTreeDef
     }, wordTreeDef.prefix = function(t) {

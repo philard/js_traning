@@ -29,8 +29,8 @@ exports.highlightTokens = function highlightTokens(e, t) {
             e.highlight = !0
         });
         for (var n = e.tokens[0].index, r = Math.max(0, n - t); n >= r; r++) {
-            tokens[r].highlight = !0;
-            selectedLines.push(tokens[r].line);
+            wtCoreInstance.wordNodes[r].highlight = !0;
+            selectedLines.push(wtCoreInstance.wordNodes[r].line);
         }
     }
 }
