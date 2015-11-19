@@ -12,9 +12,9 @@
         To prove this is a list of word nodes I feed it into the (lower) JDLS data structure visualizer. (Sorry for the crappy CSS)  </p>
 
 </div>
-<a href="s1.html?source=texts/cat-in-the-hat.txt&prefix=one">Open The Cat In The hat. </a>
+<a href="s1.html?source=texts/cat-in-the-hat.txt&prefix=cat">Open The Cat In The hat. </a>
 <a href="s1.html?source=texts/The-Very-Hungry-Caterpillar.txt&prefix=the">Open The Very Hungry Catepillar. </a>
-<a href="s1.html?source=texts/Hitch%20Hicker's%20Guide%20to%20the%20Galaxy.txt&prefix=the">Open Hitch Hicker's Guide to the Galaxy. </a>
+<a href="s1.html?source=texts/Hitch%20Hicker's%20Guide%20to%20the%20Galaxy.txt&prefix=towel">Open Hitch Hicker's Guide to the Galaxy. </a>
 
 <div id="header">
     <div class="wrapper">
@@ -50,6 +50,15 @@
 <div id="help-left"></div>
 <!--<div id="heat"></div>-->
 
+<script type="text/javascript" src="lib/jdls/viz/viz.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/jdls/site.css">
+<script type="text/javascript" src="lib/jdls/object_node.js"></script>
+<script type="text/javascript" src="lib/jdls/object_graph.js"></script>
+<script type="text/javascript" src="lib/jdls/viz_visualizer.js"></script>
+<script type="text/javascript" src="lib/jdls/user_code.js"></script>
+<script type="text/javascript" src="lib/jdls/ui.js"></script>
+
+
 <script src="lib/d3.js"></script>
 <script src="lib/d3-longscroll.js"></script>
 <script src="WtIo.js"></script>
@@ -60,16 +69,10 @@
 <script src="UiFeats.js"></script>
 
 
-<script type="text/javascript" src="lib/jdls/viz/viz.js"></script>
-<link rel="stylesheet" type="text/css" href="lib/jdls/site.css">
-<script type="text/javascript" src="lib/jdls/object_node.js"></script>
-<script type="text/javascript" src="lib/jdls/object_graph.js"></script>
-<script type="text/javascript" src="lib/jdls/viz_visualizer.js"></script>
-<script type="text/javascript" src="lib/jdls/user_code.js"></script>
-<script type="text/javascript" src="lib/jdls/ui.js"></script>
+
 <script>
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener("DOMContentLoaded", function () {
     jdls.ui.initialize({
         preloadDiv: document.getElementById("playgroundPreload"),
         errorDiv: document.getElementById("playgroundError"),
@@ -83,13 +86,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 });
 
+
 </script>
 <!-- <div id="playgroundPreload" style="display: none;"><div class="content"><div class="content_box"><div class="notification"><h2 class="highlight">Loading...</h2>
 </div></div></div></div> -->
 <!-- <div id="playgroundError" style="display: none;"><div class="content"><div class="content_box"><div class="notification"><h2 class="highlight">Unable to Load Object Visualizer</h2>
 </div></div></div></div> -->
-<div id="playgroundContent"></div>
-<div id="playgroundContent2">
+<div id="playgroundContent">
     <ul id="samples" class="tab_navigation col-1-5 objects">    </ul><!-- This list is automatically populated by the JavaScript code --><!--         <li><a>Instructions</a></li>        <li><a>Basic Class</a></li>        <li><a>Classical Inheritance</a></li>        <li><a>Resig Inheritance</a></li>        <li><a>Inception!</a></li> -->
     <div class="content">
         <div class="content_box">

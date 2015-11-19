@@ -29,9 +29,16 @@ exports.change = function change() {
 
       TextProcessing.processText(wholeBook);  //When the book is recieved the wtCoreInstance is populated with a list of nodes each with a single word.
       window.dispMe = window.wtCoreInstance.wordNodes;
-    });
-  }
-  else if (wtCoreInstance.wordNodes && wtCoreInstance.wordNodes.length) {         //The change is not in the URL
+
+
+      //11pm hacky code:
+//       var usercode = document.getElementById("usercode");
+//       usercode.value = "this.display=dispMe;"
+//       var evaluate = document.getElementById('evaluate');
+//       evaluate.click();
+  })
+
+  } else if (wtCoreInstance.wordNodes && wtCoreInstance.wordNodes.length) {         //The change is not in the URL
     var searchTerm = state.prefix;
     searchTerm = searchTerm || UiFeats.url( {prefix: searchTerm = wtCoreInstance.wordNodes[0].token } );//Ensure the search term has some text.
     keyword.property("value", searchTerm).node().select();
