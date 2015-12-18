@@ -1,0 +1,26 @@
+{
+  "name": "jstrainweek3",
+  "version": "1.0.0",
+  "description": "In week 3 I'm adding class syntax, ES6 import syntax on modules/classes, babel compiling, a package.json, mocha tests runnable from npm scripts.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./app/**/__tests__/*.spec.js --require babel-core/register"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philard/js_traning.git"
+  },
+  "keywords": [
+    "traning",
+    "JS"
+  ],
+  "author": "Philip John Ardley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/philard/js_traning/issues"
+  },
+  "homepage": "https://github.com/philard/js_traning#readme",
+  "dependencies": {
+    "babel-preset-es2015": "^6.1.18"
+  }
+}

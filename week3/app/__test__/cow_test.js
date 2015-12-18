@@ -1,10 +1,11 @@
 var expect = chai.expect;
+import Cow from '../Cow.js'
 
 describe("Cow", function() {
   describe("constructor", function() {
     it("should have a default name", function() {
       var cow = new Cow();
-      expect(cow.name).to.equal("Anon cow");
+      expect(cow.name).to.equal("Anon  cow");
     });
 
     it("should set cow's name if provided", function() {
