@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prefs window</title>
+</head>
+<body>
+Prefs window
+
+
+    <script>
+        var ipc= require('ipc');
+        debugger;
+        var button = document.createElement('button');
+        button.textContent = 'Hide';
+        button.addEventListener('click', function () {
+            ipc.send('toggle-prefs');
+        });
+        document.body.appendChild(button);
+    </script>
+</body>
+</html>

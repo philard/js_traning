@@ -2,10 +2,10 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/week3/app/Cow-compiled.js" />
         <item url="file://$PROJECT_DIR$/week3/CowController-compiled.js" />
         <item url="file://$PROJECT_DIR$/week3/app/Cow-compiled.js" />
         <item url="file://$PROJECT_DIR$/week3/app/__test__/sleepycow_test-compiled.js" />
+        <item url="file://$PROJECT_DIR$/week3/lib/mocha-compiled.js" />
         <item url="file://$PROJECT_DIR$/week3/app/__test__/cow_test-compiled.js" />
       </sourceFilesUrls>
     </properties>
@@ -700,10 +700,10 @@
       <root url="file://$PROJECT_DIR$/week3/node_modules/lodash/array/lastIndexOf-compiled.js" />
       <root url="file://$PROJECT_DIR$/week3/node_modules/core-js/fn/reflect/enumerate-compiled.js" />
       <root url="file://$PROJECT_DIR$/week3/node_modules/lodash/array/intersection-compiled.js" />
-      <root url="file://$PROJECT_DIR$/week3/app/Cow-compiled.js" />
       <root url="file://$PROJECT_DIR$/week3/CowController-compiled.js" />
       <root url="file://$PROJECT_DIR$/week3/app/Cow-compiled.js" />
       <root url="file://$PROJECT_DIR$/week3/app/__test__/sleepycow_test-compiled.js" />
+      <root url="file://$PROJECT_DIR$/week3/lib/mocha-compiled.js" />
       <root url="file://$PROJECT_DIR$/week3/app/__test__/cow_test-compiled.js" />
     </CLASSES>
     <SOURCES />
