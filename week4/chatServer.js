@@ -16,44 +16,53 @@ const dutil = require('./data');
 
 
 
-let clients = [];
-
-let questionsThree = ['what, is your name?\n', 'what, is your quest?', 'what, is your favorite color?'];
+let ctx = {
+    clients : [],
+    questionsThree : ['what, is your name?', 'what, is your quest?', 'what, is your favorite color?']
+};
 
 net.createServer((sock) => {
-    clients.push(sock);
+    ctx.clients.push(sock);
     console.log('Connected. Address:' + sock.remoteAddress +' Port:'+ sock.remotePort);
 
-    sock.sate = {
+    sock.session = {
         questionIndex:0,
         backlog: '',
+        name:'',
+        quest:'',
+        favoriteColor:''
     };
 
     sock.write(questionsThree[0]);
 
+    //START readable
     sock.on('readable', () => {
         let rawChunk = sock.read();
-        if (chunk == null) { return; }
-        var chunk = dutil.convertData((rawChunk)?rawChunk:'');
-
+        if (rawChunk == null) {
+            return;//usually means socket closing.
+        }
+        var chunk = dutil.convertData((rawChunk) ? rawChunk : '');
 
         console.log(chunk);
 
-        if(rawChunk == '\n') {
-            handleNewLine(sock.state.backlog, sock);
-            sock.state.backlog = '';
+        if(isNewLine(chunk)) {
+            let req = sock;
+            let requestHandler = getRequestHandler(req, sock.session, ctx);
+
+            var modelandview = requestHandler(req, sock.session, ctx);
+            sock.session.backlog = '';
         } else {
-            sock.backlog += chunk;
+            sock.session.backlog += chunk;
         }
 
 
-        clients.emit('',chunk,sock);
-    });
+        ctx.clients.emit('',chunk,sock);
+    });//END readable
 
-    clients.emit = function emit(channel, data, currentSock) {
+    ctx.clients.emit = function emit(channel, data, currentSock) {
 
-        for(let i=0; i<clients.length; i++) {
-            if(clients[i] !== currentSock) clients[i].write(chunk)
+        for(let i=0; i<ctx.clients.length; i++) {
+            if(ctx.clients[i] !== currentSock) ctx.clients[i].write(chunk)
         }
 
     };
@@ -69,35 +78,49 @@ net.createServer((sock) => {
     });
 
     function removeSock(sock) {
-        let idx = clients.indexOf(sock);
-        clients.splice(idx, 1);
+        let idx = ctx.clients.indexOf(sock);
+        ctx.clients.splice(idx, 1);
     }
 }).listen(7171);
 
-function handleNewLine(backlog, sock) {
+function isNewLine(data) {
+    return (data == '\r\n');
+}
 
-    if(sock.state.questionsThree < questionsThree.length) {
-        receiveQAnswer(backlog, sock.state.questionIndex);
+/*
+Get request handler for (newline) request. A bit like SpringMVC's request mapping xml file.
+ */
+function getRequestHandler(req, session, ctx) {
+    let requestHandler;
+    if(session.questionIndex == 0) {
+        return handleQuestionOne;
+    } else if(session.questionIndex == 1) {
+        return handleQuestionTwo;
+    } else if(session.questionIndex == 2) {
+        return handleQuestionThree;
     }
 
 }
 
-function receiveQAnswer(backlog, sock) {
-    if(sock.state.questionIndex == 0) {
-        if (!sock.state.userdata) sock.state.userdata = {};
-        sock.state.userdata.name = backlog;
+
+function handleQuestionOne(req, session, ctx) {
+    session.name = backlog;
+    return questionsThree[1];
+}
+
+function handleQuestionTwo(req, session, ctx) {
+    session.quest = backlog;
+    return questionsThree[2];
+}
+
+function handleQuestionThree(req, session, ctx) {
+    session.favoriteColor = backlog;
+    return 'you may pass';
+}
 
 
-        sock.write(questionsThree[1]);
-        return;
-
-    } else if(questionIndex == 1) {
-        if(!sock.state.userdata) {sock.state.userdata = {}}
-        sock.state.userdata.quest = backlog;
-
-        sock.write(questionsThree[2]);
-        return;
-    }
+function handleChatMessageRequest(req, session, ctx) {
+    return 'todo...';
 }
 
 console.log('Server listening on 7171');
