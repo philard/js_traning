@@ -13,5 +13,5 @@ app.use(auth('admin', 'pass'));
 app.use(express.static(__dirname + '/public'));
 
 server.listen(8080, () => {
-	console.log('hello 8080')
+    console.log('hello 8080')
 });
