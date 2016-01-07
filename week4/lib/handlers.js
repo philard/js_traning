@@ -1,7 +1,7 @@
 'use strict';
 
 let handlers = {};
-module.exports = handlers;
+
 
 /*
  Get request handler for (newline) request. A bit like SpringMVC's request mapping xml file.
@@ -43,10 +43,23 @@ function handleHandlerNotFoundException(req, session, ctx) {
     return '404 - no handler found for you';
 }
 
-function handleChatMessage() {
-    ctx.clients.emit('',chunk,sock);//TOOTOTOTODOODOODOOD
+function oldhandleChatMessage(req, session, ctx) {
+    ctx.telnetUtils.emit('', session.backlog, req);
+
+    return '> ';//no need for \r\n because the user has just typed return.
 }
 
-function handleChatMessageRequest(req, session, ctx) {
-    return 'todo...';
+function handleChatMessage(req, session, ctx) {
+
+    let message = session.backlog;
+
+    ctx.telnetUtils.emitLineInsertion(req, ctx, message);
+
+    return '';
 }
+
+
+
+
+
+module.exports = handlers;

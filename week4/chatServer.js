@@ -10,12 +10,13 @@ let handlers = require('./lib/handlers');
 
 const dutil = require('./data');
 
-
+let telnetUtils = require('./lib/telnetUtils');
 
 
 let ctx = {
     clients : [],
-    questionsThree : ['what, is your name?', 'what, is your quest?', 'what, is your favorite color?']
+    questionsThree : ['what, is your name?\r\n', 'what, is your quest?\r\n', 'what, is your favorite color?\r\n'],
+    telnetUtils : telnetUtils
 };
 
 net.createServer((sock) => {
@@ -23,14 +24,18 @@ net.createServer((sock) => {
     console.log('Connected. Address:' + sock.remoteAddress +' Port:'+ sock.remotePort);
 
     sock.session = {
-        questionIndex:0,
-        backlog: '',
-        name:'',
-        quest:'',
-        favoriteColor:''
+        questionIndex : 0,
+        backlog : '',
+        name : '',
+        quest : '',
+        favoriteColor : '',
+        chucked : false
     };
 
     sock.write(ctx.questionsThree[0]);
+
+    ctx.telnetUtils.emitLineInsertion(sock, ctx, 'a new client connected');
+
 
     //START readable
     sock.on('readable', () => {
@@ -38,7 +43,7 @@ net.createServer((sock) => {
         if (rawChunk == null) {
             return;//usually means socket closing.
         }
-        var chunk = dutil.convertData((rawChunk) ? rawChunk : '');
+        let chunk = dutil.convertData((rawChunk) ? rawChunk : '');
 
         console.log(chunk);
 
@@ -51,6 +56,11 @@ net.createServer((sock) => {
             sock.session.backlog = '';
 
             sock.write(modelandview);
+        } else if(isNo(chunk, sock.session)) {
+            sock.write(' AAAAAAAHHHHHHHHHHhhhhhhhhhhhhh...\r\n')
+        } else if(isChuckedClient(chunk, sock.session)) {
+            sock.write('Go away. You\'re dead.\r\n');
+            sock.write(new Buffer([7]));
         } else {
             sock.session.backlog += chunk;
         }
@@ -77,13 +87,13 @@ function isNewLine(data) {
     return (data == '\r\n');
 }
 
+function isNo(data, session) {
+    let lastThreeChars = (session.backlog.slice(-2)+ data).toLowerCase();
+    return lastThreeChars === ' no' || lastThreeChars === ',no';
+}
 
-ctx.clients.emit = function emit(channel, data, currentSock) {
-
-    for(let i=0; i<ctx.clients.length; i++) {
-        if(ctx.clients[i] !== currentSock) ctx.clients[i].write(chunk)
-    }
-
-};
+function isChuckedClient(data, session) {
+    return session.isChucked;
+}
 
 console.log('Server listening on 7171');
