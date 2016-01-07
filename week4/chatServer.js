@@ -6,7 +6,7 @@
 'use strict';
 
 /**
- * A very basic chat server code
+ * A chat server with some inital questions for the user.
  */
 
 let net = require('net');
@@ -33,7 +33,7 @@ net.createServer((sock) => {
         favoriteColor:''
     };
 
-    sock.write(questionsThree[0]);
+    sock.write(ctx.questionsThree[0]);
 
     //START readable
     sock.on('readable', () => {
@@ -50,13 +50,16 @@ net.createServer((sock) => {
             let requestHandler = getRequestHandler(req, sock.session, ctx);
 
             var modelandview = requestHandler(req, sock.session, ctx);
+
             sock.session.backlog = '';
+
+            sock.write(modelandview);
         } else {
             sock.session.backlog += chunk;
         }
 
 
-        ctx.clients.emit('',chunk,sock);
+
     });//END readable
 
     ctx.clients.emit = function emit(channel, data, currentSock) {
@@ -98,26 +101,38 @@ function getRequestHandler(req, session, ctx) {
         return handleQuestionTwo;
     } else if(session.questionIndex == 2) {
         return handleQuestionThree;
+    } else if(session.questionIndex >= 3) {
+        return handleChatMessage;
     }
 
 }
 
 
 function handleQuestionOne(req, session, ctx) {
-    session.name = backlog;
-    return questionsThree[1];
+    session.name = session.backlog;
+    session.questionIndex = 1;
+    return ctx.questionsThree[1];
 }
 
 function handleQuestionTwo(req, session, ctx) {
-    session.quest = backlog;
-    return questionsThree[2];
+    session.quest = session.backlog;
+    session.questionIndex = 2;
+    return ctx.questionsThree[2];
 }
 
 function handleQuestionThree(req, session, ctx) {
-    session.favoriteColor = backlog;
+    session.favoriteColor = session.backlog;
+    session.questionIndex = 3;
     return 'you may pass';
 }
 
+function handleHandlerNotFoundException(req, session, ctx) {
+    return '404 - no handler found for you';
+}
+
+function handleChatMessage() {
+    ctx.clients.emit('',chunk,sock);//TOOTOTOTODOODOODOOD
+}
 
 function handleChatMessageRequest(req, session, ctx) {
     return 'todo...';
