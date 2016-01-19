@@ -2,7 +2,7 @@
 export default class Cow {
 
   constructor(name) {
-    this.name = name || "Anon    elllvooo cow";
+    this.name = name || "Anonymous cow";
   }
 
   greets(target) {

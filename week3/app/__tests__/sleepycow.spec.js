@@ -1,10 +1,15 @@
+'use strict';
+
+import chai from 'chai';
 var expect = chai.expect;
+import SleepyCow from '../SleepyCow';
+
 
 describe("SleepyCow", function() {
   describe("constructor", function() {
     it("should have a default name", function() {
       var cow = new SleepyCow();
-      expect(cow.name).to.equal("Anon  cow");
+      expect(cow.name).to.equal("Anonymous cow");
     });
 
     it("should set cow's name if provided", function() {

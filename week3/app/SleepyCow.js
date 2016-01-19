@@ -1,11 +1,11 @@
-// cow.js
+'use strict';
+
+
 (function(exports) {
-  "use strict";
 
   function SleepyCow(name) {
-    this.name = name || "Anon cow";
+    this.name = name || "Anonymous cow";
   }
-  exports.SleepyCow = SleepyCow;
 
   SleepyCow.prototype = {
     greets: function(target) {
