@@ -1,10 +1,8 @@
-/**
- * Module dependencies.
- */
+'use strict';
 
 var express = require('express');
 var http = require('http');
-var authorization = require('../');
+var authorization = require('express-authorization');
 
 var app = express();
 
@@ -33,7 +31,7 @@ authorization.ensureRequest.options = {
   //redirectTo:'/login'
 };
 
-var ensureAssertView = authorization.ensureRequest.isPermitted('assert:view');
+var ensureAssetView = authorization.ensureRequest.isPermitted('asset:view');
 
 // Define Routes
 app.get('/', function (req, res) {
@@ -47,11 +45,10 @@ app.get('/login', function (req, res) {
 app.post('/login', function (req, res) {
   req.session.user = {
     username: "root",
-    permissions: [ 'assert:view,edit' ]
+    permissions: [ 'asset:view,edit' ]
   };
   res.redirect(req.session.urlPriorLogin);
   delete req.session.urlPriorLogin;
-
 });
 
 app.get('/logout', function (req, res) {
@@ -59,11 +56,11 @@ app.get('/logout', function (req, res) {
   res.redirect('/');
 });
 
-app.get('/assert', ensureAssertView, function (req, res) {
-  res.render('assert', { });
+app.get('/asset', ensureAssetView, function (req, res) {
+  res.render('asset', { });
 });
 
-app.use(ensureAssertView);
+app.use(ensureAssetView);
 
 app.use(express.static(__dirname + '/public'));
 
