@@ -8,9 +8,6 @@ let authorization = require('express-authorization');
 let app = express();
 
 
-let security = require('./lib/security');
-let userPassAuth = require('./lib/user-pass-auth.js');
-app.use(security(userPassAuth));
 
 
 
