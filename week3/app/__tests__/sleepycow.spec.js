@@ -1,8 +1,8 @@
 'use strict';
 
-import chai from 'chai';
+var SleepyCow = SleepyCow || require('../SleepyCow').default;
+var chai = chai || require('chai');
 var expect = chai.expect;
-import SleepyCow from '../SleepyCow';
 
 
 describe("SleepyCow", function() {
