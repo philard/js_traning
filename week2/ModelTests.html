@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Mocha</title>
+    <link rel="stylesheet" href="lib/mocha.css">
+    <link rel="shortcut icon" href="../favicon.ico">
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="lib/mocha.js"></script>
+    <script src="lib/chai.js"></script>
+    <script src="app/Cow.js"></script>
+    <script src="app/SleepyCow.js"></script>
+    <script>mocha.setup('bdd')</script>
+    <script>expect = chai.expect</script>
+    <script src="app/__tests__/cow.spec.js"></script>
+    <script src="app/__tests__/sleepycow.spec.js"></script>
+    <script>
+      mocha.run();
+    </script>
+  </body>
+</html>
