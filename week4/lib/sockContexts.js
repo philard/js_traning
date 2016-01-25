@@ -51,7 +51,8 @@ exports.dispatchResponce = function dispatchResponce(sock){
 
         sock.write(modelandview);
     } else if(textUtils.isNo(chunk, sock.session)) {
-        sock.write(' AAAAAAAHHHHHHHHHHhhhhhhhhhhhhh...\r\n')
+        sock.write(' AAAAAAAHHHHHHHHHHhhhhhhhhhhhhh...\r\n');
+        sock.session.isChucked = true;
     } else if(textUtils.isChuckedClient(chunk, sock.session)) {
         sock.write('Go away. You\'re dead.\r\n');
         sock.write(new Buffer([7]));
