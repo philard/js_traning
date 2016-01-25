@@ -1,3 +1,7 @@
+'use strict';
+
+var SleepyCow = SleepyCow || require('../SleepyCow.js').default;
+var chai = chai || require('chai');
 var expect = chai.expect;
 
 describe("SleepyCow", function() {
