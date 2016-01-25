@@ -26,6 +26,7 @@ describe("SleepyCow", function() {
     });
   });
 
+
   describe("#lateGreets", function() {
     it("should pass an error if no target is passed", function(done) {
       (new SleepyCow()).lateGreets(null, function(err, greetings) {
