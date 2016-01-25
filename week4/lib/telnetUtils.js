@@ -6,7 +6,6 @@ function emit(channel, data, currentSock) {
     for(let i=0; i<ctx.clients.length; i++) {
         if(ctx.clients[i] !== currentSock) {
 
-            //bad code?currentSock.send(new Buffer(chunk));
             ctx.clients[i].write(data)
         }
     }
@@ -46,9 +45,26 @@ function emitLineInsertion(currentSock, ctx, inserted) {
 }
 
 
+function convertData(data) {
+    data = new Buffer(data);
+    var decoder = new StringDecoder('utf8');
+    let decoded = decoder.write(data);
+
+    return String(decoded);
+}
+
+function isNewLine(data) {
+    return (data == '\r\n');
+}
+
+
+
+
 
 let telnetUtils = {
     emit:emit,
-    emitLineInsertion:emitLineInsertion
+    emitLineInsertion:emitLineInsertion,
+    convertData:convertData,
+    isNewLine:isNewLine
 };
 module.exports = telnetUtils;
