@@ -1,5 +1,5 @@
-"use strict";
-// cow.js
+'use strict';
+
 var Cow = (function() {
 
   function Cow(name) {
@@ -18,4 +18,4 @@ var Cow = (function() {
 })();
 
 
-if(typeof exports !== 'undefined') exports.default = Cow;
+if(typeof exports !== 'undefined') exports.default = Cow; //Assigning to default because otherwise Cow would be called binded to undefined, causing an error.

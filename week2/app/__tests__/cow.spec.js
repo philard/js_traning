@@ -1,6 +1,4 @@
-
-
-
+'use strict';
 
 var Cow = Cow || require('../Cow.js').default;
 var chai = chai || require('chai');
