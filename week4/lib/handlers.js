@@ -26,19 +26,19 @@ handlers.handlers.handleQuestionOne = function(req, session, ctx) {
     session.name = session.backlog;
     session.questionIndex = 1;
     return ctx.questionsThree[1];
-}
+};
 
 handlers.handlers.handleQuestionTwo = function(req, session, ctx) {
     session.quest = session.backlog;
     session.questionIndex = 2;
     return ctx.questionsThree[2];
-}
+};
 
 handlers.handlers.handleQuestionThree = function(req, session, ctx) {
     session.favoriteColor = session.backlog;
     session.questionIndex = 3;
     return 'you may pass\r\n';
-}
+};
 
 handlers.handlers.handleChatMessage = function(req, session, ctx) {
 
@@ -47,11 +47,11 @@ handlers.handlers.handleChatMessage = function(req, session, ctx) {
     telnetUtils.emitLineInsertion(req, ctx, message);
 
     return '';
-}
+};
 
 handlers.handlers.handleHandlerNotFoundException = function(req, session, ctx) {
     return '404 - no handler found for you';
-}
+};
 
 
 module.exports = handlers;
