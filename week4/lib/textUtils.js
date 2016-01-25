@@ -1,6 +1,5 @@
 'use strict';
 
-const StringDecoder = require('string_decoder').StringDecoder;
 
 module.exports = {
 

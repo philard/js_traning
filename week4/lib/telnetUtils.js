@@ -1,5 +1,6 @@
 'use strict';
 
+const StringDecoder = require('string_decoder').StringDecoder;
 
 
 function emit(channel, data, currentSock) {

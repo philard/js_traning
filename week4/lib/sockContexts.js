@@ -1,8 +1,8 @@
 'use strict';
 
-let textUtils= require('./lib/textUtils');
-let handlers = require('./lib/handlers');
-
+let textUtils= require('./textUtils');
+let handlers = require('./handlers');
+let telnetUtils= require('./telnetUtils');
 
 let ctx = {
     clients : [],
@@ -26,7 +26,7 @@ exports.initializeSock = function initializeSock(sock) {
 
     sock.write(ctx.questionsThree[0]);
 
-    ctx.telnetUtils.emitLineInsertion(sock, ctx, 'a new client connected');
+    telnetUtils.emitLineInsertion(sock, ctx, 'a new client connected');
 
 };
 

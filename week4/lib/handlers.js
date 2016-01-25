@@ -1,13 +1,11 @@
 'use strict';
 
-let handlers = {};
+let telnetUtils = require('./telnetUtils');
 
 
-/*
- Get request handler for (newline) request. A bit like SpringMVC's request mapping xml file.
- */
-handlers.getRequestHandler = function getRequestHandler(req, session, ctx) {
-    let requestHandler;
+ //getRequestHandler called on a newline. This code is a bit like SpringMVC's request mapping xml file.
+exports.getRequestHandler = function getRequestHandler(req, session, ctx) {
+
     if(session.questionIndex == 0) {
         return handleQuestionOne;
     } else if(session.questionIndex == 1) {
@@ -36,24 +34,19 @@ function handleQuestionTwo(req, session, ctx) {
 function handleQuestionThree(req, session, ctx) {
     session.favoriteColor = session.backlog;
     session.questionIndex = 3;
-    return 'you may pass';
+    return 'you may pass\r\n';
 }
 
 function handleHandlerNotFoundException(req, session, ctx) {
     return '404 - no handler found for you';
 }
 
-function oldhandleChatMessage(req, session, ctx) {
-    ctx.telnetUtils.emit('', session.backlog, req);
-
-    return '> ';//no need for \r\n because the user has just typed return.
-}
 
 function handleChatMessage(req, session, ctx) {
 
-    let message = session.backlog;
+    let message = session.name + ' said: ' + session.backlog;
 
-    ctx.telnetUtils.emitLineInsertion(req, ctx, message);
+    telnetUtils.emitLineInsertion(req, ctx, message);
 
     return '';
 }
@@ -62,4 +55,4 @@ function handleChatMessage(req, session, ctx) {
 
 
 
-module.exports = handlers;
+module.exports = exports;
