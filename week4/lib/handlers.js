@@ -9,12 +9,16 @@ handlers.getRequestHandler = function getRequestHandler(req, session, ctx) {
 
     if(session.questionIndex == 0) {
         return handlers.handlers.handleQuestionOne;
+
     } else if(session.questionIndex == 1) {
         return handlers.handlers.handleQuestionTwo;
+
     } else if(session.questionIndex == 2) {
         return handlers.handlers.handleQuestionThree;
+
     } else if(session.questionIndex >= 3 && typeof session.name !== 'undefined') {
         return handlers.handlers.handleChatMessage;
+
     } else {
         return handlers.handlers.handleHandlerNotFoundException;
     }
@@ -30,6 +34,7 @@ handlers.handlers.handleQuestionOne = function(req, session, ctx) {
 
 handlers.handlers.handleQuestionTwo = function(req, session, ctx) {
     session.quest = session.backlog;
+    console.log('quest:'+session.quest);
     session.questionIndex = 2;
     return ctx.questionsThree[2];
 };
