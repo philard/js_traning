@@ -21,9 +21,12 @@ app.use(cookieParser('your secret here'));
 app.use(session());
 
 
+app.get('/', (req, res) => {
+    res.render('home', { session: req.session });
+});
 
-app.get('/login', function (req, res) {
-    res.render('login', { });
+app.get(['/login'], function (req, res) {
+    res.render('login', { session: req.session });
 });
 
 app.post('/login', function (req, res) {
@@ -32,7 +35,8 @@ app.post('/login', function (req, res) {
     if(user && user.password == req.body.password) {
 
         req.session.user = user;
-        res.redirect(req.session.urlPriorLogin);
+        let urlPriorLogin = (req.session.urlPriorLogin || '/secure');
+        res.redirect(urlPriorLogin );
         delete req.session.urlPriorLogin;
 
     } else {
@@ -41,7 +45,7 @@ app.post('/login', function (req, res) {
 });
 
 
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 
 app.use('/secure', secure);
 

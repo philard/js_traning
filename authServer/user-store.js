@@ -8,7 +8,10 @@ let userStore = {root:{
     },
     philard:{
         username: 'philard',
-        permission: '*;*',
+        permissions: [
+            'secure:*',
+            'user_page:*'
+        ],
         password: '123456'
     }
 };
