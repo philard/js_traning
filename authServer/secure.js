@@ -31,8 +31,11 @@ router.get('/user_page', ensureUserPageView, (req, res) => {
 });
 
 router.post('/user_page', ensureUserPageEdit, function (req, res) {
-    let permissionRule = req.session.user.permissions[req.body.noun];
-    permissionRule = [req.body.permissions];
+    let noun = req.body.noun;
+    let verbs = req.body.verbs;
+
+    let permissionRule = req.session.user.setPermission(noun, verbs)
+
     res.redirect('/secure/user_page');//, { user: req.session.user });
 });
 
