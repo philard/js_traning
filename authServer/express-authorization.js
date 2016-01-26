@@ -25,6 +25,11 @@ app.get('/', (req, res) => {
     res.render('home', { session: req.session });
 });
 
+app.get('/logout', (req, res) => {
+    delete req.session.user;
+    res.redirect('/');
+});
+
 app.get(['/login'], function (req, res) {
     res.render('login', { session: req.session });
 });
@@ -40,7 +45,7 @@ app.post('/login', function (req, res) {
         delete req.session.urlPriorLogin;
 
     } else {
-        res.redirect('/login');
+        res.sendFile(__dirname+'/public/login_fail.html');
     }
 });
 

@@ -6,7 +6,29 @@
 </body>
 
 <p>
-    Next week we will learn about sessions in express :).
+    secure.html
+</p>
+
+
+<p>
+    The <a href="/secure">/secure</a> page is only available to users that
+    pass the ensureSecureView middleware
+</p>
+<p>
+    var ensureSecureView = authorization.ensureRequest.isPermitted('secure:view');
+</p>
+
+<br>
+
+<p>
+    Try the <a href="/secure/user_page">/secure/user_page</a>
+    <div>Here is the middleware guarding the user_page:</div>
+</p>
+<p>
+    var ensureUserPageView = authorization.ensureRequest.isPermitted('user_page:view');
+</p>
+<p>
+    var ensureUserPageEdit = authorization.ensureRequest.isPermitted('user_page:edit');
 </p>
 
 </html>

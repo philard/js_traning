@@ -1,19 +1,26 @@
 'use strict';
 
-//User Store
-let userStore = {root:{
+let searchableArray = require('./searchableArray');
+
+let userStore = {
+    root:{
         username: 'root',
-        permission: '*:*',
-        password: '123456'
-    },
-    philard:{
-        username: 'philard',
-        permissions: [
+        permission: [
             'secure:*',
             'user_page:*'
         ],
         password: '123456'
+    },
+    philard:{
+        username: 'philard',
+        permissions: searchableArray([
+            'secure:*',
+            'user_page:*'
+        ]),
+        password: '123456'
     }
 };
+
+
 //END User store
   module.exports = userStore;

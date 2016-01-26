@@ -13,15 +13,16 @@ Hello <%=session.user.username%>. <a href="logout">Logout</a>
 <% } %>
 
 <p>
-  The <a href="/secure">/secure</a> and <a href="/secure/user_page">/secure/user_page</a> page is only available to users that have the "noun:verb" permission.
-  "express-authorization" is used to enforce this rule.  Follow the links below to
-  control your authentication state and attempt to visit the <a href="asset">/assert</a> page.
+  The <a href="/secure">/secure</a> and <a href="/secure/user_page">/secure/user_page</a> page is
+  only available to users that have the "noun:verb" permission.
+  <a href="https://www.npmjs.com/package/express-authorization">"express-authorization"</a>
+  is used to enforce this rule.
 </p>
 
 <form method="POST" action="/login">
   <div>
     <label>Username</label>
-    <input name="username" value=""/>
+    <input name="username" value="root"/>
   </div>
   <div>
     <label>Password</label>

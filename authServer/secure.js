@@ -27,14 +27,13 @@ router.get('/', ensureSecureView, (req, res) => {
 
 
 router.get('/user_page', ensureUserPageView, (req, res) => {
-//router.get('/user_page', (req, res) => {
     res.render('user_page', { user: req.session.user});
 });
 
-//router.post('/user_page', ensureUserPageEdit, function (req, res) {
-router.post('/user_page', function (req, res) {
-    req.session.user.permissions = [req.body.permissions];
-    res.render('user_page', { });
+router.post('/user_page', ensureUserPageEdit, function (req, res) {
+    let permissionRule = req.session.user.permissions[req.body.noun];
+    permissionRule = [req.body.permissions];
+    res.redirect('/secure/user_page');//, { user: req.session.user });
 });
 
 module.exports = router;
