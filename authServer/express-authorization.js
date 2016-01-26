@@ -39,7 +39,7 @@ app.post('/login', function (req, res) {
     let user = userStore[req.body.username];
     if(user && user.password == req.body.password) {
 
-        req.session.user = user;
+        req.session.user = user;//Its soo sad (but safe) that user must be serializable. ALL functions will be stripped from sessions's user.
         let urlPriorLogin = (req.session.urlPriorLogin || '/secure');
         res.redirect(urlPriorLogin );
         delete req.session.urlPriorLogin;
