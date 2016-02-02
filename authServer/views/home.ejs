@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Express Authorization Example - Home</title>
+  </head>
+  <body>
+    <h1>Express Authorization Example - Home</h1>
+
+
+    <% if (session.user ? false : true) { %>
+    <a href="login">Login</a>
+    <% } else { %>
+    Hello <%=session.user.username%>. <a href="logout">Logout</a>
+    <% } %>
+
+    <p>
+      The <a href="/secure">/secure</a> and <a href="/secure/user_page">/secure/user_page</a> page is only available to users that have the "noun:verb" permission.
+      "express-authorization" is used to enforce this rule.  Follow the links below to
+      control your authentication state and attempt to visit the <a href="asset">/assert</a> page.
+    </p>
+
+
+
+
+  </body>
+</html>

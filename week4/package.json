@@ -1,0 +1,21 @@
+{
+  "name": "week4-telnet-server",
+  "version": "1.0.0",
+  "description": "telnet server. Connect by typing \"telnet localhost 7171\", answer the qustions, avoid typing \" no\", chat to other clients that connect.",
+  "main": "chatServer.js",
+  "scripts": {
+    "start": "node chatServer",
+    "test": "mocha ./__tests__/*.spec.js"
+  },
+  "author": "Philip John Ardley",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "babel-preset-es2015": "^6.1.18",
+    "babel-preset-stage-0": "^6.1.18",
+    "chai": "^3.4.1",
+    "mocha": "^2.3.4",
+    "string_decoder": "^0.10.31"
+  }
+}

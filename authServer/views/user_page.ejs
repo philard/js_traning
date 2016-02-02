@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Express Authorization Example - User Page</title>
+    <style>
+      DIV.table
+      {
+        display:table;
+      }
+      FORM.tr, DIV.tr
+      {
+        display:table-row;
+      }
+      SPAN.td
+      {
+        display:table-cell;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>User Page</h1>
+
+    Hello <%=user.username%>. <a href="/logout">Logout</a> ; <a href="/">Here to return to the home page</a> ; <a href="/secure">Here to view secure page</a>
+    </p>
+
+    <% if(typeof message != "undefined") {%>
+    <p>Message:<%=message%></p>
+    <% } %>
+
+    <div class="table">
+      <span class="td">resource / noun name</span>
+      <span class="td">permission(s) / verb(s)</span>
+      <span class="td">action(s)</span>
+      <%
+        var parsedPermissions = user.getParsedPermissions();
+        for(var pm of parsedPermissions) {
+      %>
+      <form class="tr" method="POST" action="/secure/user_page">
+        <span class="td">
+          <input name="noun" value="<%= pm.noun %>"/>
+        </span>
+        <span class="td">
+          <input name="verbs" value="<%= pm.verbs %>"/>
+        </span>
+        <span class="td">
+          <input type="submit" value="Save"/>
+        </span>
+      </form>
+      <% } %>
+      <form class="tr" method="POST" action="/secure/user_page">
+        <span class="td">
+          <input name="noun" value="">
+        </span>
+        <span class="td">
+          <input name="verbs" value="">
+        </span>
+        <span class="td">
+          <input type="submit" value="Add">
+        </span>
+      </form>
+    </div>
+
+    <br><br><br><br>
+    <p>
+      Warning: if you set your "user_page" to "view", you will lose the permission to edit your own permissions!
+    </p>
+    <p>
+      You'd have to get root (pass=123456) to set your permissions.
+    </p>
+    <form method="POST" action="/secure/user_page">
+      <div>
+        <label>Username</label>
+        <input name="username" value="root"/>
+      </div>
+      <div>
+        <label>noun</label>
+        <input name="noun" value="user_page">
+        <label>verbs</label>
+        <input name="verbs" value="view,edit"/>
+      </div>
+      <input type="submit" value="Save" />
+    </form>
+  </body>
+</html>

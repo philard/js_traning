@@ -1,10 +1,15 @@
+'use strict';
+
+var SleepyCow = SleepyCow || require('../SleepyCow').default;
+var chai = chai || require('chai');
 var expect = chai.expect;
+
 
 describe("SleepyCow", function() {
   describe("constructor", function() {
     it("should have a default name", function() {
       var cow = new SleepyCow();
-      expect(cow.name).to.equal("Anon cow");
+      expect(cow.name).to.equal("Anonymous cow");
     });
 
     it("should set cow's name if provided", function() {

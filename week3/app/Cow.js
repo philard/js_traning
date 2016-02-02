@@ -1,8 +1,8 @@
-"use strict:";
+"use strict";
 export default class Cow {
 
   constructor(name) {
-    this.name = name || "Anon      cow";
+    this.name = name || "Anonymous cow";
   }
 
   greets(target) {
