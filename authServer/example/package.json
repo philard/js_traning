@@ -1,0 +1,13 @@
+{
+  "name": "express-authorization-example",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "ejs": "~0.8.4",
+    "express": "~3.4.4",
+    "express-authorization": "^1.0.0"
+  }
+}

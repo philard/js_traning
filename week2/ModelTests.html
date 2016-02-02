@@ -10,12 +10,12 @@
     <div id="mocha"></div>
     <script src="lib/mocha.js"></script>
     <script src="lib/chai.js"></script>
-    <script src="Cow.js"></script>
-    <script src="SleepyCow.js"></script>
+    <script src="app/Cow.js"></script>
+    <script src="app/SleepyCow.js"></script>
     <script>mocha.setup('bdd')</script>
     <script>expect = chai.expect</script>
-    <script src="cow_test.js"></script>
-    <script src="sleepycow_test.js"></script>
+    <script src="app/__tests__/cow.spec.js"></script>
+    <script src="app/__tests__/sleepycow.spec.js"></script>
     <script>
       mocha.run();
     </script>

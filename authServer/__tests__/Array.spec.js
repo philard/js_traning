@@ -1,3 +1,7 @@
+'use strict';
+
+let chai = require('chai');
+let expect = chai.expect;
 
 describe('Array', function(){
   describe('.push()', function(){

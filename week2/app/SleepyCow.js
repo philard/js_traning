@@ -1,11 +1,9 @@
-// cow.js
-(function(exports) {
-  "use strict";
+'use strict';
+var SleepyCow = (function() {
 
   function SleepyCow(name) {
     this.name = name || "Anon cow";
   }
-  exports.SleepyCow = SleepyCow;
 
   SleepyCow.prototype = {
     greets: function(target) {
@@ -23,4 +21,8 @@
       }, 1000, this);
     }
   };
-})(this);
+  return SleepyCow;
+})();
+
+
+if(typeof exports !== 'undefined') exports.default = SleepyCow; //Assigning to default because otherwise Cow would be called binded to undefined, causing an error.

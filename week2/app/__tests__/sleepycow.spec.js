@@ -1,3 +1,7 @@
+'use strict';
+
+var SleepyCow = SleepyCow || require('../SleepyCow.js').default;
+var chai = chai || require('chai');
 var expect = chai.expect;
 
 describe("SleepyCow", function() {
@@ -25,6 +29,7 @@ describe("SleepyCow", function() {
       expect(greetings).to.equal("SleepyKate asynchronously greets mouse");
     });
   });
+
 
   describe("#lateGreets", function() {
     it("should pass an error if no target is passed", function(done) {

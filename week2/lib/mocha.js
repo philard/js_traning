@@ -5146,7 +5146,7 @@ var fs = require('browser/fs')
  * Ignored directories.
  */
 
-var ignore = ['node_modules', '.git'];
+var ignore = ['node_modulesMon', '.git'];
 
 /**
  * Escape special characters in the given string of html.
